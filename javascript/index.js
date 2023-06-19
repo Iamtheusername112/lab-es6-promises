@@ -170,19 +170,32 @@ obtainInstruction("steak", 7).then((step7) => {
 // ... Your code here
 
 async function makeBroccoli() {
-  // ... Your code here
-  try {
-    // console.log(`${broccoli[0]}`);
-    await obtainInstruction("broccoli", 0);
-    document.querySelector("#broccoli").innerHTML += `<li>${step0}</li>`;
-  } catch (error) {
-    console.log("broccoli wasn't made", error);
-  } finally {
-    console.log("broccoli was made anyways");
+  for (const step of broccoli) {
+    document.querySelector("#broccoli").innerHTML += `<li>${step}</li>`;
+    await new Promise((resolve) => setTimeout(resolve, 1000)); //
   }
+  document.querySelector(
+    "#broccoli"
+  ).innerHTML += `<li>Broccoli is ready!</li>`;
+  document.querySelector("#broccoliImg").removeAttribute("hidden");
 }
-
 makeBroccoli();
 
 // Bonus 2 - Promise all
 // ...
+console.log(brusselsSprouts);
+Promise.all(brusselsSprouts).then(() => {
+  setTimeout(() => {
+    for (let i = 0; i < brusselsSprouts.length; i++) {
+      document.querySelector(
+        "#brusselsSprouts"
+      ).innerHTML += `<li>${brusselsSprouts[i]}</li>`;
+    }
+  }, 1000);
+  setTimeout(() => {
+    document.querySelector(
+      "#brusselsSprouts"
+    ).innerHTML += `<li>Brussels sprouts are ready!</li>`;
+  }, 1500);
+  document.querySelector("#brusselsSproutsImg").removeAttribute("hidden");
+});
